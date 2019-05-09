@@ -47,7 +47,7 @@ namespace WXB
                     string name = (++s_total).ToString();
 #if UNITY_EDITOR
                     // If we're in the editor, create the game object with hide flags set right away
-                    GameObject go = UnityEditor.EditorUtility.CreateGameObjectWithHideFlags(name, HideFlags.NotEditable | HideFlags.DontSave /*| HideFlags.HideInHierarchy*/);
+                    GameObject go = UnityEditor.EditorUtility.CreateGameObjectWithHideFlags(name, HideFlags.DontSave);
                     obj = go.AddComponent<T>();
                     parent.AddChild(go);
                     obj.name = string.Format("{0}-{1}", typeof(T).Name, name);

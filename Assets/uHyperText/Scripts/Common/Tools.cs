@@ -295,9 +295,10 @@ namespace WXB
         public static T AddChild<T>(this GameObject go) where T : MonoBehaviour
         {
             GameObject child = new GameObject();
+            var t = child.AddComponent<T>();
             AddChild(go, child);
 
-            return child.AddComponent<T>();
+            return t;
         }
 
         public static void AddChild(this GameObject go, GameObject child)
@@ -312,36 +313,20 @@ namespace WXB
             child.layer = go.layer;
         }
 
-        static public void Destroy(Object obj)
+        static public void Destroy(GameObject go)
         {
-            if (obj)
+#if UNITY_EDITOR
+            if (Application.isPlaying)
             {
-                if (obj is Transform)
-                {
-                    GameObject go = ((Transform)obj).gameObject;
-
-                    if (Application.isPlaying)
-                    {
-                        Object.Destroy(go);
-                    }
-                    else
-                        Object.DestroyImmediate(go);
-                }
-                else if (obj is GameObject)
-                {
-                    GameObject go = obj as GameObject;
-
-                    if (Application.isPlaying)
-                    {
-                        Object.Destroy(go);
-                    }
-                    else Object.DestroyImmediate(go);
-                }
-                else if (Application.isPlaying)
-                    Object.Destroy(obj);
-                else
-                    Object.DestroyImmediate(obj);
+                DelayDestory.Destroy(go);
             }
+            else
+            {
+                DelayDestory.DestroyImmediate(go);
+            }
+#else
+            DelayDestory.Destroy(go);            
+#endif
         }
 
         public static void UpdateRect(RectTransform child, Vector2 offset)

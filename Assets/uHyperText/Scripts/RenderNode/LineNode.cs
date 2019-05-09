@@ -20,7 +20,7 @@ namespace WXB
         public override void fill(ref Vector2 currentpos, List<Line> lines, float maxWidth, float pixelsPerUnit)
         {
             height = FontCache.GetLineHeight(font, (int)(fontSize * pixelsPerUnit), fs) / pixelsPerUnit;
-            lines.Add(new Line(new Vector2(0, height)));
+            lines.Add(new Line(new Vector2(NextLineX, height)));
         }
 
         public override void render(float maxWidth, RenderCache cache, ref float x, ref uint yline, List<Line> lines, float offsetX, float offsetY)

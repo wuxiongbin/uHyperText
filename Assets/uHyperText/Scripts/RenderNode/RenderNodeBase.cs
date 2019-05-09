@@ -17,6 +17,9 @@ namespace WXB
     {
         public Owner owner;
 
+        float d_nextLineX = 0;
+        protected float NextLineX = 0;
+
         public virtual void Reset(Owner o, Anchor hf)
         {
             d_bNewLine = false;
@@ -24,9 +27,10 @@ namespace WXB
             owner = o;
 
             formatting = hf;
+            d_nextLineX = 0;
         }
 
-        protected static float AlignedFormatting(Owner owner, Anchor formatting, float maxWidth, float curWidth)
+        protected static float AlignedFormatting(Owner owner, Anchor formatting, float maxWidth, float curWidth, float lineX)
         {
             if (formatting == Anchor.Null)
                 formatting = owner.anchor;
@@ -43,6 +47,7 @@ namespace WXB
             case Anchor.UpperLeft:
             case Anchor.MiddleLeft:
             case Anchor.LowerLeft:
+                value = lineX;
                 break;
 
             case Anchor.MiddleCenter:
@@ -85,8 +90,10 @@ namespace WXB
 
         }
 
+        // lineX下一行的偏移量
         public virtual void fill(ref Vector2 currentpos, List<Line> lines, float maxWidth, float pixelsPerUnit)
         {
+            NextLineX = d_nextLineX * pixelsPerUnit;
             List<Element> TempList;
             UpdateWidthList(out TempList, pixelsPerUnit);
             float height = getHeight();
@@ -102,7 +109,7 @@ namespace WXB
                 float newx = 0f;
                 if (((currentpos.x + totalwidth) > maxWidth))
                 {
-                    currentpos = TempList[i].Next(this, currentpos, lines, maxWidth, height, around, totalwidth, ref isContain);
+                    currentpos = TempList[i].Next(this, currentpos, lines, maxWidth, NextLineX, height, around, totalwidth, ref isContain);
                     ++i;
                 }
                 else if (around != null && !around.isContain(currentpos.x, currentpos.y, totalwidth, height, out newx))
@@ -126,7 +133,7 @@ namespace WXB
             {
                 lines.Add(new Line(Vector2.zero));
                 currentpos.y += height;
-                currentpos.x = 0;
+                currentpos.x = NextLineX;
             }
         }
 
@@ -186,7 +193,7 @@ namespace WXB
                 return string.Format("text:{0} w:{1}", text, totalwidth);
             }
 #endif
-            public Vector2 Next(NodeBase n, Vector2 currentPos, List<Line> lines, float maxWidth, float height, Around round, float tw, ref bool currentLineContain)
+            public Vector2 Next(NodeBase n, Vector2 currentPos, List<Line> lines, float maxWidth, float lineX, float height, Around round, float tw, ref bool currentLineContain)
             {
                 if (currentPos.x != 0f)
                 {
@@ -198,10 +205,10 @@ namespace WXB
                     }
 
                     // 当前行有数据，在新行里处理
-                    currentPos.x = 0f;
+                    currentPos.x = lineX;
                     currentPos.y += bl.y;
                     currentLineContain = false;
-                    lines.Add(new Line(new Vector2(0, 0)));
+                    lines.Add(new Line(new Vector2(lineX, 0)));
                 }
                 else
                 {
@@ -216,8 +223,8 @@ namespace WXB
                         currentPos.x = newx;
                         if (currentPos.x + tw > maxWidth)
                         {
-                            currentPos.x = 0f;
-                            lines.Add(new Line(new Vector2(0, height)));
+                            currentPos.x = lineX;
+                            lines.Add(new Line(new Vector2(lineX, height)));
                             currentPos.y += height;
                         }
                     }
@@ -227,12 +234,12 @@ namespace WXB
                 {
                     for (int i = 0; i < widthList.Count; ++i)
                     {
-                        currentPos = Add(n, currentPos, widthList[i], maxWidth, lines, height, ref currentLineContain);
+                        currentPos = Add(n, currentPos, widthList[i], maxWidth, lineX, lines, height, ref currentLineContain);
                     }
                 }
                 else
                 {
-                    currentPos = Add(n, currentPos, totalWidth, maxWidth, lines, height, ref currentLineContain);
+                    currentPos = Add(n, currentPos, totalWidth, maxWidth, lineX, lines, height, ref currentLineContain);
                 }
 
                 lines.back().x = currentPos.x;
@@ -240,7 +247,7 @@ namespace WXB
                 return currentPos;
             }
 
-            Vector2 Add(NodeBase n, Vector2 currentPos, float width, float maxWidth, List<Line> lines, float height, ref bool currentLineContain)
+            Vector2 Add(NodeBase n, Vector2 currentPos, float width, float maxWidth, float lineX, List<Line> lines, float height, ref bool currentLineContain)
             {
                 if (currentPos.x + width > maxWidth)
                 {
@@ -250,7 +257,7 @@ namespace WXB
                     if (currentLineContain)
                         bl.y = Mathf.Max(bl.y, height);
 
-                    currentPos.x = width;
+                    currentPos.x = lineX + width;
                     lines.Add(new Line(new Vector2(currentPos.x, height)));
                     currentPos.y += height;
                 }
@@ -318,6 +325,7 @@ namespace WXB
 
         public virtual void SetConfig(TextParser.Config c)
         {
+            d_nextLineX = c.nextLineX;
             d_bBlink = c.isBlink;
             lineAlignment = c.lineAlignment;
 

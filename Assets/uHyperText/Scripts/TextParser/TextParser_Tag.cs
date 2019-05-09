@@ -160,7 +160,7 @@ namespace WXB
                     node.d_font = Tools.GetFont(att.getValueAsString("fn"));
 
                 node.d_color = ParserColorName(att.getValueAsString("fc"), 0, node.d_color);
-                node.hoveColor = ParserColorName(att.getValueAsString("fhc"), 0, node.hoveColor);
+                node.hoveColor = ParserColorName(att.getValueAsString("fhc"), 0, node.d_color);
 
                 node.d_bUnderline = att.getValueAsBool("ul", node.d_bUnderline);
                 node.d_bStrickout = att.getValueAsBool("so", node.d_bStrickout);

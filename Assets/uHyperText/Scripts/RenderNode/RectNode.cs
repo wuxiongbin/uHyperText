@@ -36,11 +36,11 @@ namespace WXB
 
             if (x + width > maxWidth)
             {
-				x = 0;
+				x = NextLineX;
 				yline++;
 			}
 
-			float alignedX = AlignedFormatting(owner, formatting, maxWidth, lines[(int)(yline)].x);
+			float alignedX = AlignedFormatting(owner, formatting, maxWidth, lines[(int)(yline)].x, 0);
 
 			float y_offset = offsetY;
 			for (int i = 0; i < yline; ++i)
@@ -56,7 +56,7 @@ namespace WXB
                 x = newfx - alignedX - offsetX;
                 if (x + width > maxWidth)
                 {
-                    x = 0;
+                    x = NextLineX;
                     yline++;
                     y_offset += lines[(int)yline].y;
                     areaRect = new Rect(x + offsetX + alignedX, y_offset, width, height);

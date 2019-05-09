@@ -98,7 +98,7 @@ namespace WXB
             using (PD<StringBuilder> psb = Pool.GetSB())
             {
                 Helper helper = new Helper(maxWidth, cache, x, yline, lines, formatting, offsetX, offsetY, psb.value);
-                helper.Draw(this);
+                helper.Draw(this, NextLineX);
 
                 x = helper.x;
                 yline = helper.yline;

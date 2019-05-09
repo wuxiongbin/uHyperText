@@ -49,7 +49,7 @@ namespace WXB
 
             float fHeight;
 
-            void DrawCurrent(bool isnewLine, Around around)
+            void DrawCurrent(bool isnewLine, Around around, float lineX)
             {
                 if (sb.Length != 0)
                 {
@@ -64,7 +64,7 @@ namespace WXB
                 {
                     // 再换行
                     yline++;
-                    x = 0.0f;
+                    x = lineX;
 
                     pt.x = offsetX;
                     pt.y = offsetY;
@@ -77,7 +77,7 @@ namespace WXB
                         //Debug.LogError("yline >= vLineSize.Count!yline:" + yline + " vLineSize:" + lines.Count);
                     }
 
-                    alignedX = AlignedFormatting(node.owner, xFormatting, maxWidth, lines[(int)(yline)].x);
+                    alignedX = AlignedFormatting(node.owner, xFormatting, maxWidth, lines[(int)(yline)].x, lineX);
 
                     float newx; 
                     if (!around.isContain(pt.x + alignedX, pt.y, 1, node.getHeight(), out newx))
@@ -88,7 +88,7 @@ namespace WXB
                 }
             }
 
-            public void Draw(TextNode n)
+            public void Draw(TextNode n, float lineX)
             {
                 node = n;
                 pt = new Vector2(x + offsetX, offsetY);
@@ -98,7 +98,7 @@ namespace WXB
                 if (maxWidth == 0)
                     return;
 
-                alignedX = AlignedFormatting(n.owner, xFormatting, maxWidth, lines[(int)(yline)].x);
+                alignedX = AlignedFormatting(n.owner, xFormatting, maxWidth, lines[(int)(yline)].x, 0);
                 fHeight = node.getHeight();
 
                 sb.Remove(0, sb.Length);
@@ -115,14 +115,14 @@ namespace WXB
                     {
                         if (x != 0f)
                         {
-                            DrawCurrent(true, around);
+                            DrawCurrent(true, around, lineX);
                         }
 
                         if (e.widths == null)
                         {
                             if ((x + e.totalwidth > maxWidth))
                             {
-                                DrawCurrent(true, around);
+                                DrawCurrent(true, around, lineX);
                             }
                             else
                             {
@@ -136,7 +136,7 @@ namespace WXB
                             {
                                 if (x != 0 && x + e.widths[m] > maxWidth)
                                 {
-                                    DrawCurrent(true, around);
+                                    DrawCurrent(true, around, lineX);
                                 }
                                 else
                                 {
@@ -149,7 +149,7 @@ namespace WXB
                     }
                     else if (!around.isContain(x, pt.y, totalwidth, fHeight, out newx))
                     {
-                        DrawCurrent(false, around);
+                        DrawCurrent(false, around, lineX);
 
                         x = newx;
                         pt.x = newx;
@@ -166,13 +166,13 @@ namespace WXB
 
                 if (sb.Length != 0)
                 {
-                    DrawCurrent(false, around);
+                    DrawCurrent(false, around, lineX);
                 }
 
                 if (node.d_bNewLine == true)
                 {
                     yline++;
-                    x = 0;
+                    x = lineX;
                 }
             }
         }

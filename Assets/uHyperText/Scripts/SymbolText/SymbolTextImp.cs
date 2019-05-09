@@ -171,7 +171,7 @@ namespace WXB
                     if (last_size == rectTransform.rect.size)
                         return;
 
-                    SetVerticesDirty();
+                    SetLayoutDirty();
                 }
                 else
                 {

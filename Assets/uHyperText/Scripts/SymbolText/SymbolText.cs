@@ -312,14 +312,16 @@ namespace WXB
                 mRenderCache.Render(vh, inputRect, refPoint, scaleSize, workerMesh, material);
 
                 m_DisableFontTextureRebuiltCallback = false;
+
+                last_size = rectTransform.rect.size;
             }
             else
             {
                 vh.Clear(); // clear the vertex helper so invalid graphics dont draw.
                 canvasRenderer.Clear();
-            }
 
-            last_size = rectTransform.rect.size;
+                last_size = Vector2.zero;
+            }
         }
 
         public float getNodeHeight()

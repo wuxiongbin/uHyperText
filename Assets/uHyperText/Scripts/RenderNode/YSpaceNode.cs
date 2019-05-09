@@ -18,7 +18,7 @@ namespace WXB
             if (d_bNewLine == true)
             {
                 yline++;
-                x = offsetX;
+                x = offsetX + NextLineX;
             }
             else
             {

@@ -63,6 +63,21 @@ namespace WXB
             OnFuns['7'] = ParserCartoon;
             OnFuns['8'] = ParserCartoon;
             OnFuns['9'] = ParserCartoon;
+
+            OnFuns['&'] = ParserNextLineX;
+        }
+
+        void ParserNextLineX(string text)
+        {
+            int linex = -1;
+            if (!ParserInt(ref d_curPos, text, ref linex, 5))
+                return;
+
+            if (linex == currentConfig.nextLineX)
+                return;
+
+            save(false);
+            currentConfig.nextLineX = linex;
         }
 
         void ParserCartoon(string text)
@@ -92,8 +107,9 @@ namespace WXB
             cn.cartoon = cartoon;
             cn.width = cartoon.width;
             cn.height = cartoon.height;
-
             cn.SetConfig(currentConfig);
+            // 表情不变色
+            cn.d_color = Color.white;
             d_nodeList.Add(cn);
         }
 

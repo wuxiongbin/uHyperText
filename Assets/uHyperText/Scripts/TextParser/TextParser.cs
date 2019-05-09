@@ -142,6 +142,7 @@ namespace WXB
             public Vector2 effectDistance;
 
             public LineAlignment lineAlignment;
+            public int nextLineX; // 下一行的起始偏移量
 
             public void Clear()
             {
@@ -164,6 +165,7 @@ namespace WXB
                 effectDistance = Vector2.zero;
 
                 lineAlignment = LineAlignment.Default;
+                nextLineX = 0;
             }
 
             public void Set(Config c)
@@ -187,6 +189,7 @@ namespace WXB
                 isDyncUnderline = c.isDyncUnderline;
                 isDyncStrickout = c.isDyncStrickout;
                 lineAlignment = c.lineAlignment;
+                nextLineX = c.nextLineX;
             }
 
             public bool isSame(Config c)
@@ -202,6 +205,7 @@ namespace WXB
                        lineAlignment == c.lineAlignment &&
                        isDyncUnderline == c.isDyncUnderline &&
                        isDyncStrickout == c.isDyncStrickout &&
+                       nextLineX == c.nextLineX &&
                        dyncSpeed == c.dyncSpeed &&
                        (
                        (effectType == EffectType.Null && c.effectType == EffectType.Null) ||

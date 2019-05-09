@@ -24,12 +24,12 @@ namespace WXB
 				pt.y += lines[i].y;
 
 			// 因对齐，X轴偏移量
-			float alignedX = AlignedFormatting(owner, formatting, maxWidth, lines[(int)(yline)].x);
+			float alignedX = AlignedFormatting(owner, formatting, maxWidth, lines[(int)(yline)].x, 0);
 
 			if (x + d_offset + alignedX > maxWidth)
 			{
 				yline++;
-				x = 0.0f;
+				x = NextLineX;
 			}
 			else
 			{
@@ -42,7 +42,7 @@ namespace WXB
 			if (d_bNewLine == true)
 			{
 				yline++;
-				x = 0;
+				x = NextLineX;
 			}
 		}
 

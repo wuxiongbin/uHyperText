@@ -10,7 +10,7 @@ namespace WXB
         public override DrawType type { get { return DrawType.Cartoon; } }
 
         public Cartoon cartoon { get; set; }
-        int frameIndex = 0;
+        int frameIndex = -1;
         float mDelta = 0f;
 
         void UpdateAnim(float deltaTime)
@@ -27,6 +27,9 @@ namespace WXB
                     frameIndex = 0;
                 }
             }
+
+            if (frameIndex < 0)
+                frameIndex = 0;
         }
 
         class Data
@@ -117,7 +120,7 @@ namespace WXB
         {
             base.Release();
             mData.Clear();
-            frameIndex = 0;
+            frameIndex = -1;
         }
 
         public void GraphicUpdateComplete() { }

@@ -147,6 +147,7 @@ namespace WXB
                 }
 
                 node.d_text = sb.ToString();
+                node.hoveColor = node.d_color;
             }
         }
 
