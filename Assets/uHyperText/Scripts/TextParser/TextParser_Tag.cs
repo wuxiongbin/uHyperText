@@ -269,6 +269,22 @@ namespace WXB
                 currentConfig.offsetRect.yMin = -x / 2f;
                 currentConfig.offsetRect.yMax = x / 2f;
             });
+
+            // 外部结点
+            Reg("external ", (tag, att)=> 
+            {
+                if (getExternalNode == null)
+                {
+                    Debug.LogErrorFormat("external node but getExternalNode is null!");
+                    return;
+                }
+
+                ExternalNode sn = CreateNode<ExternalNode>();
+                sn.SetConfig(currentConfig);
+                sn.Set(getExternalNode(att));
+
+                d_nodeList.Add(sn);
+            });
         }
 
         static void ParamEffectType(ref Config config, TagAttributes att)

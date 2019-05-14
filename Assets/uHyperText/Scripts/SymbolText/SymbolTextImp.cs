@@ -138,13 +138,16 @@ namespace WXB
 
         protected static List<NodeBase> s_nodebases = new List<NodeBase>();
 
+        // 得到外部结点
+        public System.Func<TagAttributes, IExternalNode> getExternalNode { get; set; }
+
         // 根据新文本，解析结点
         public void UpdateByTextDirty()
         {
             Clear();
 
             s_nodebases.Clear();
-            Parser.parser(this, text, CreateConfig(), s_nodebases);
+            Parser.parser(this, text, CreateConfig(), s_nodebases, getExternalNode);
             s_nodebases.ForEach((NodeBase nb) =>
             {
                 mNodeList.AddLast(nb);

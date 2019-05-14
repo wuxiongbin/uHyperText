@@ -218,11 +218,14 @@ namespace WXB
             }
         }
 
-        public void parser(Owner owner, string text, Config config, List<NodeBase> vList)
+        System.Func<TagAttributes, IExternalNode> getExternalNode = null;
+
+        public void parser(Owner owner, string text, Config config, List<NodeBase> vList, System.Func<TagAttributes, IExternalNode> getExternalNode)
         {
             clear();
 
             mOwner = owner;
+            this.getExternalNode = getExternalNode;
             d_nodeList = vList;
             startConfig.Set(config);
             currentConfig.Set(config);
@@ -428,12 +431,13 @@ namespace WXB
 
         protected void clear()
         {
+            getExternalNode = null;
             startConfig.Clear();
             currentConfig.Clear();
 
             d_nodeList = null;
             d_curPos = 0;
-            d_text.Remove(0, d_text.Length);
+            d_text.Clear();
             d_bBegin = false;
             mOwner = null;
         }

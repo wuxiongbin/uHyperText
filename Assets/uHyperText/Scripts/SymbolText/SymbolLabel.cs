@@ -75,7 +75,7 @@ namespace WXB
 
             ++endl;
             s_nodebases.Clear();
-            Parser.parser(this, text, CreateConfig(), s_nodebases);
+            Parser.parser(this, text, CreateConfig(), s_nodebases, getExternalNode);
             s_nodebases.ForEach((NodeBase nb) =>
             {
                 nb.userdata = endl;
