@@ -33,7 +33,10 @@ namespace WXB
         void IExternalNode.OnDestroy()
         {
             if (root != null)
-                root.gameObject.SetActive(false);
+            {
+                UnityEngine.Object.Destroy(root.gameObject);
+                //root.gameObject.SetActive(false);
+            }
         }
 
         void IExternalNode.OnRender(Owner owner, Rect rect)
