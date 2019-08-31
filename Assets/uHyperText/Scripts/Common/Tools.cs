@@ -155,16 +155,20 @@ namespace WXB
 
         public static bool ScreenPointToWorldPointInRectangle(RectTransform rectTrans, Vector2 screenPoint, Camera cam, out Vector2 worldPoint)
         {
-            worldPoint = Vector2.zero;
-            Ray ray = RectTransformUtility.ScreenPointToRay(cam, screenPoint);
-            float enter;
-            if (!new Plane(rectTrans.rotation * Vector3.back, rectTrans.position).Raycast(ray, out enter))
+            if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTrans, screenPoint, cam, out worldPoint))
                 return false;
 
-            worldPoint = ray.GetPoint(enter);
-            worldPoint = rectTrans.worldToLocalMatrix.MultiplyPoint(worldPoint);
             LB2LT(ref worldPoint, rectTrans.rect.height);
             return true;
+
+            //             worldPoint = Vector2.zero;
+            //             Ray ray = RectTransformUtility.ScreenPointToRay(cam, screenPoint);
+            //             float enter;
+            //             if (!new Plane(rectTrans.rotation * Vector3.back, rectTrans.position).Raycast(ray, out enter))
+            //                 return false;
+
+//             worldPoint = ray.GetPoint(enter);
+//             worldPoint = rectTrans.worldToLocalMatrix.MultiplyPoint(worldPoint);
         }
 
         static public Color ParseColor(string text, int offset, Color defc)
@@ -318,14 +322,17 @@ namespace WXB
 #if UNITY_EDITOR
             if (Application.isPlaying)
             {
-                DelayDestory.Destroy(go);
+                Object.Destroy(go);
+                //DelayDestory.Destroy(go);
             }
             else
             {
-                DelayDestory.DestroyImmediate(go);
+                Object.DestroyImmediate(go);
+                //DelayDestory.DestroyImmediate(go);
             }
 #else
-            DelayDestory.Destroy(go);            
+            Object.Destroy(go);
+            //DelayDestory.Destroy(go);            
 #endif
         }
 

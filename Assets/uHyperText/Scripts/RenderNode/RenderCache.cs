@@ -32,7 +32,10 @@ namespace WXB
 
             public bool isContain(Vector2 pos)
             {
-                return m_Rect.Contains(pos);
+                var rect = new Rect(m_Rect);
+                rect.y = rect.y + line.y - rect.height;
+
+                return rect.Contains(pos);
             }
 
             public virtual bool isAlignByGeometry
@@ -47,6 +50,11 @@ namespace WXB
             public virtual void OnMouseUp(PointerEventData eventData) { }
 
             public int subMaterial { get; set; }
+
+            public override string ToString()
+            {
+                return string.Format("rect:{0}", m_Rect);
+            }
 
             public virtual void Release()
             {
@@ -273,7 +281,7 @@ namespace WXB
 
         public void Render(VertexHelper vh, Rect rect, Vector2 offset, float pixelsPerUnit, Mesh workerMesh, Material defaultMaterial)
         {
-            DrawOffset = offset;
+            DrawOffset = offset /** pixelsPerUnit*/;
             s_keys.Clear();
             for (int m = 0; m < DataList.Count; ++m)
             {

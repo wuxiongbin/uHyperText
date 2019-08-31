@@ -53,9 +53,10 @@ namespace WXB
             {
                 if (sb.Length != 0)
                 {
+                    var line = lines[(int)yline];
                     Rect area_rect = new Rect(pt.x + alignedX, pt.y, x - pt.x + offsetX, node.getHeight());
 
-                    cache.cacheText(lines[(int)yline], node, sb.ToString(), area_rect);
+                    cache.cacheText(line, node, sb.ToString(), area_rect);
 
                     sb.Remove(0, sb.Length);
                 }

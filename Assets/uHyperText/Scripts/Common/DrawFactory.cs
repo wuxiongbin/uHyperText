@@ -58,6 +58,7 @@ namespace WXB
                 }
 
                 obj.transform.SetParent(parent.transform);
+                obj.gameObject.layer = parent.layer;
                 obj.OnInit();
                 return obj;
             }

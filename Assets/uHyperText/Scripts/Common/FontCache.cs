@@ -44,7 +44,11 @@ namespace WXB
             sCachedTextGenerator.Populate(text, settings);
 
             IList<UIVertex> verts = sCachedTextGenerator.verts;
+#if UNITY_2019
+            lineHeight = (int)(verts[0].position.y - verts[4].position.y);
+#else
             lineHeight = (int)(verts[0].position.y - verts[8].position.y);
+#endif
             FontLineHeight.Add(key, lineHeight);
             return lineHeight;
         }

@@ -242,10 +242,10 @@ namespace WXB
                 currentConfig.effectType = EffectType.Null;
             });
 
-            // 描边效果
+            // 阴影
             Reg("so ", (string tag, TagAttributes att) =>
             {
-                currentConfig.effectType = EffectType.Outline;
+                currentConfig.effectType = EffectType.Shadow;
                 ParamEffectType(ref currentConfig, att);
             });
 
