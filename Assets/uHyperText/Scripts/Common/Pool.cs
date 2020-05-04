@@ -25,11 +25,8 @@ namespace WXB
             bufs.Add(t);
         }
 
-        static public void FreeList(List<T> list, System.Action<T> fun)
+        static public void FreeList(List<T> list)
         {
-            for (int i = 0; i < list.Count; ++i)
-                fun(list[i]);
-
             bufs.AddRange(list);
             list.Clear();
         }

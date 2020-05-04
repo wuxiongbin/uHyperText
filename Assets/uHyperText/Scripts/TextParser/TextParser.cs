@@ -23,10 +23,17 @@ namespace WXB
     {
         public T CreateNode<T>() where T : NodeBase, new()
         {
-            T t = new T();
+            //T t = new T();
+            var t = NodePools<T>.Get();
             t.Reset(mOwner, currentConfig.anchor);
+            t.free = FreeNode<T>;
 
             return t;
+        }
+
+        static void FreeNode<T>(NodeBase nb) where T : NodeBase, new()
+        {
+            NodePools<T>.Free((T)nb);
         }
 
         static bool Get(char c, out Anchor a)
@@ -222,6 +229,17 @@ namespace WXB
 
         public void parser(Owner owner, string text, Config config, List<NodeBase> vList, System.Func<TagAttributes, IExternalNode> getExternalNode)
         {
+            if (string.IsNullOrEmpty(text))
+            {
+                return;
+            }
+
+            if (config.font == null)
+            {
+                Debug.LogError("TextParser pFont == null");
+                return;
+            }
+
             clear();
 
             mOwner = owner;
@@ -229,17 +247,6 @@ namespace WXB
             d_nodeList = vList;
             startConfig.Set(config);
             currentConfig.Set(config);
-
-            if (currentConfig.font == null)
-            {
-                Debug.LogError("TextParser pFont == null");
-                return;
-            }
-
-            if (string.IsNullOrEmpty(text))
-            {
-                return;
-            }
 
             int lenght = text.Length;
             while (lenght > d_curPos)

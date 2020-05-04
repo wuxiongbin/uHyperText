@@ -92,7 +92,7 @@ namespace WXB
             get { return (Anchor)alignment; }
         }
 
-        static void FreeNode(NodeBase node)
+        protected static void FreeNode(NodeBase node)
         {
             if (node == null)
             {
@@ -205,7 +205,7 @@ namespace WXB
             }
         }
 
-        List<Line> mLines = new List<Line>(); // 每一行的大小
+        public List<Line> mLines = new List<Line>(); // 每一行的大小
 
         protected override void Awake()
         {

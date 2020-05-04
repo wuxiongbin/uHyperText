@@ -48,10 +48,8 @@ namespace WXB
 
 		public float d_offset;
 
-        public override void Release()
+        protected override void ReleaseSelf()
         {
-            base.Release();
-
             d_offset = 0f;
         }
 	};

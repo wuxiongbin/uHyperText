@@ -38,10 +38,8 @@ namespace WXB
             AlterX(ref x, maxWidth);
         }
 
-        public override void Release()
+        protected override void ReleaseSelf()
         {
-            base.Release();
-
             d_value = 0f;
         }
 	};

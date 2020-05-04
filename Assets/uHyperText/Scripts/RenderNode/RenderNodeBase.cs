@@ -337,7 +337,7 @@ namespace WXB
                 d_rectOffset.Set(0, 0, 0, 0);
         }
 
-        public virtual void Release()
+        public void Release()
         {
             d_color = Color.white;
             d_bNewLine = false;
@@ -347,6 +347,17 @@ namespace WXB
             d_bOffset = false;
             d_rectOffset.Set(0, 0, 0, 0);
             userdata = null;
+
+            ReleaseSelf();
+            if (free != null)
+            {
+                free(this);
+                free = null;
+            }
         }
+
+        public System.Action<NodeBase> free;
+
+        protected abstract void ReleaseSelf();
     };
 }

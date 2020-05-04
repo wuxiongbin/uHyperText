@@ -16,6 +16,7 @@ namespace WXB
             factorys.Add(DrawType.OffsetAndAlpha, new Factory<AlphaOffsetDraw>());
 
             factorys.Add(DrawType.Cartoon, new Factory<CartoonDraw>());
+            factorys.Add(DrawType.ISprite, new Factory<ISpriteDraw>());
         }
 
         public interface IFactory
@@ -47,7 +48,7 @@ namespace WXB
                     string name = (++s_total).ToString();
 #if UNITY_EDITOR
                     // If we're in the editor, create the game object with hide flags set right away
-                    GameObject go = UnityEditor.EditorUtility.CreateGameObjectWithHideFlags(name, HideFlags.DontSave);
+                    GameObject go = UnityEditor.EditorUtility.CreateGameObjectWithHideFlags(name, HideFlags.HideAndDontSave);
                     obj = go.AddComponent<T>();
                     parent.AddChild(go);
                     obj.name = string.Format("{0}-{1}", typeof(T).Name, name);

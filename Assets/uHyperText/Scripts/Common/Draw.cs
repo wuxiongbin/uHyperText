@@ -12,6 +12,7 @@ namespace WXB
         Outline, // 画线
         OffsetAndAlpha, // 透明+位置
         Cartoon, // 动画
+        ISprite, // 异步加载的Sprite
     }
 
     public interface Draw

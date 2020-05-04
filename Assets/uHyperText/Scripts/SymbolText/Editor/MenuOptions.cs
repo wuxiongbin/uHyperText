@@ -91,7 +91,7 @@ namespace WXB
             itemTransform.localScale = Vector3.one;
         }
 
-        private static void PlaceUIElementRoot(GameObject element, MenuCommand menuCommand)
+        public static void PlaceUIElementRoot(GameObject element, MenuCommand menuCommand)
         {
             GameObject parent = menuCommand.context as GameObject;
             if (parent == null || parent.GetComponentInParent<Canvas>() == null)

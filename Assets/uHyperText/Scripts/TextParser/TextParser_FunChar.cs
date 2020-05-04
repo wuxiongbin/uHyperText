@@ -105,8 +105,8 @@ namespace WXB
 
             CartoonNode cn = CreateNode<CartoonNode>();
             cn.cartoon = cartoon;
-            cn.width = cartoon.width;
-            cn.height = cartoon.height;
+            cn.width = cartoon.width * 0.5f;
+            cn.height = cartoon.height * 0.5f;
             cn.SetConfig(currentConfig);
             // 表情不变色
             cn.d_color = Color.white;

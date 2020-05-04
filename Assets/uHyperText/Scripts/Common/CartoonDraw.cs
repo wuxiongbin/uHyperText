@@ -4,6 +4,26 @@ using System.Collections.Generic;
 
 namespace WXB
 {
+    class SpriteData
+    {
+        public Vector2 leftPos;
+        public Color color;
+        public float width;
+        public float height;
+
+        public void Gen(VertexHelper vh, Vector4 uv)
+        {
+            int count = vh.currentVertCount;
+            vh.AddVert(new Vector3(leftPos.x, leftPos.y), color, new Vector2(uv.x, uv.y));
+            vh.AddVert(new Vector3(leftPos.x, leftPos.y + height), color, new Vector2(uv.x, uv.w));
+            vh.AddVert(new Vector3(leftPos.x + width, leftPos.y + height), color, new Vector2(uv.z, uv.w));
+            vh.AddVert(new Vector3(leftPos.x + width, leftPos.y), color, new Vector2(uv.z, uv.y));
+
+            vh.AddTriangle(count, count + 1, count + 2);
+            vh.AddTriangle(count + 2, count + 3, count);
+        }
+    }
+
     [ExecuteInEditMode]
     public class CartoonDraw : EffectDrawObjec, ICanvasElement
     {
@@ -32,27 +52,7 @@ namespace WXB
                 frameIndex = 0;
         }
 
-        class Data
-        {
-            public Vector2 leftPos;
-            public Color color;
-            public float width;
-            public float height;
-
-            public void Gen(VertexHelper vh, Vector4 uv)
-            {
-                int count = vh.currentVertCount;
-                vh.AddVert(new Vector3(leftPos.x, leftPos.y), color, new Vector2(uv.x, uv.y));
-                vh.AddVert(new Vector3(leftPos.x, leftPos.y + height), color, new Vector2(uv.x, uv.w));
-                vh.AddVert(new Vector3(leftPos.x + width, leftPos.y + height), color, new Vector2(uv.z, uv.w));
-                vh.AddVert(new Vector3(leftPos.x + width, leftPos.y), color, new Vector2(uv.z, uv.y));
-
-                vh.AddTriangle(count, count + 1, count + 2);
-                vh.AddTriangle(count + 2, count + 3, count);
-            }
-        }
-
-        List<Data> mData = new List<Data>();
+        List<SpriteData> mData = new List<SpriteData>();
 
         public bool isOpenAlpha
         {
@@ -68,7 +68,13 @@ namespace WXB
 
         public void Add(Vector2 leftPos, float width, float height, Color color)
         {
-            mData.Add(new Data() { leftPos = leftPos, color = color, width = width, height = height });
+            var sd = PoolData<SpriteData>.Get();
+            sd.leftPos = leftPos;
+            sd.color = color;
+            sd.width = width;
+            sd.height = height;
+
+            mData.Add(sd);
         }
 
         public override void UpdateSelf(float deltaTime)
@@ -77,7 +83,7 @@ namespace WXB
             int f = frameIndex;
             UpdateAnim(deltaTime);
 
-            if (f != frameIndex)
+            if (f != frameIndex || (currentIsEmpty && cartoon.sprites[f].Get() != null))
             {
                 CanvasUpdateRegistry.RegisterCanvasElementForGraphicRebuild(this);
             }
@@ -92,6 +98,7 @@ namespace WXB
 #endif
         }
 
+        bool currentIsEmpty = false;
         public void Rebuild(CanvasUpdate executing)
         {
             if (executing != CanvasUpdate.PreRender)
@@ -100,9 +107,16 @@ namespace WXB
             if (mData == null)
                 return;
 
-            Sprite s = cartoon.sprites[frameIndex];
-            var uv = UnityEngine.Sprites.DataUtility.GetOuterUV(cartoon.sprites[frameIndex]);
+            ISprite si = cartoon.sprites[frameIndex];
+            Sprite s = si.Get();
+            if (s == null)
+            {
+                currentIsEmpty = true;
+                return;
+            }
 
+            currentIsEmpty = false;
+            var uv = UnityEngine.Sprites.DataUtility.GetOuterUV(s);
             VertexHelper vh = Tools.vertexHelper;
             vh.Clear();
             for (int i = 0; i < mData.Count; ++i)
@@ -119,7 +133,7 @@ namespace WXB
         public override void Release()
         {
             base.Release();
-            mData.Clear();
+            PoolData<SpriteData>.FreeList(mData);
             frameIndex = -1;
         }
 

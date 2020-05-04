@@ -200,7 +200,7 @@ namespace WXB
                     isset = true;
                     node.GetLineCharacterInfo(out s_Info);
 
-                    Vector2 startpos = new Vector2(leftBottomPos.x, minY);
+                    Vector2 startpos = new Vector2(leftBottomPos.x, leftBottomPos.y - line_height);
 
                     if (node.d_bDynUnderline)
                     {

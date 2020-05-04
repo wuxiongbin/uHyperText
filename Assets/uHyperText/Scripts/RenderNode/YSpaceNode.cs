@@ -26,11 +26,9 @@ namespace WXB
             }
         }
 
-        public override void Release()
+        protected override void ReleaseSelf()
         {
-            base.Release();
-
             d_offset = 0f;
         }
-	};
+	}
 }

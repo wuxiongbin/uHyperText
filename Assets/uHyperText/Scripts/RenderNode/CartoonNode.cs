@@ -21,5 +21,10 @@ namespace WXB
             rect.width -= space;
             cache.cacheCartoon(line, this, cartoon, rect);
         }
-    };
+
+        protected override void ReleaseSelf()
+        {
+            cartoon = null;
+        }
+    }
 }

@@ -84,9 +84,9 @@ public class CreateAnim
                 Cartoon c = new Cartoon();
                 c.name = i.ToString();
                 c.fps = 5f;
-                c.sprites = tempss.ToArray();
-                c.width = (int)c.sprites[0].rect.width;
-                c.height = (int)c.sprites[0].rect.height;
+                c.sprites = To(tempss);
+                c.width = (int)c.sprites[0].width;
+                c.height = (int)c.sprites[0].height;
 
                 Cartoons.Add(i.ToString(), c);
 
@@ -104,5 +104,17 @@ public class CreateAnim
 
         info.SetValue(sti, cartoons.ToArray());
         EditorUtility.SetDirty(sti);
+    }
+
+    static DSprite[] To(IList<Sprite> sprites)
+    {
+        int count = sprites.Count;
+        DSprite[] ds = new DSprite[count];
+        for (int i = 0; i < count; ++i)
+        {
+            ds[i] = new DSprite(sprites[i]);
+        }
+
+        return ds;
     }
 }

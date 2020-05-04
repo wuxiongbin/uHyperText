@@ -190,21 +190,17 @@ namespace WXB
             base.SetLayoutDirty();
             SetMaterialDirty();
             SetRenderDirty();
-            m_textDirty = true;
             m_layoutDirty = true;
         }
 
         public void UpdateTextHeight()
         {
-            if (pixelsPerUnit <= 0f)
-                return;
-
             renderCache.Release();
-            float w = rectTransform.rect.size.x /** pixelsPerUnit*/;
             mLines.Clear();
-            if (w <= 0f)
-                return;
-
+            float width = rectTransform.rect.width;
+            if (width <= 0f)
+                width = 10f;
+            
             d_Around.Clear();
             foreach (NodeBase node in mNodeList)
             {
@@ -219,7 +215,7 @@ namespace WXB
             Vector2 currentpos = Vector2.zero;
             float scale = pixelsPerUnit;
             foreach (NodeBase node in mNodeList)
-                node.fill(ref currentpos, mLines, w, scale);
+                node.fill(ref currentpos, mLines, width, scale);
 
             for (int i = 0; i < mLines.Count; ++i)
             {

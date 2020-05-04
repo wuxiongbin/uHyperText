@@ -161,10 +161,8 @@ namespace WXB
             }
         }
 
-        public override void Release()
+        protected override void ReleaseSelf()
         {
-            base.Release();
-
             d_text = null;
             d_font = null;
             d_fontSize = 0;

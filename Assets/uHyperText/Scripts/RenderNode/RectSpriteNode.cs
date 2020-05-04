@@ -7,7 +7,21 @@ namespace WXB
     {
         public Rect rect;
 
-        public Sprite sprite;
+        ISprite sprite;
+
+        public void SetSprite(ISprite sprite)
+        {
+#if UNITY_EDITOR
+            if (this.sprite != null)
+            {
+                Debug.LogError("this.sprite != null");
+                this.sprite.SubRef();
+            }
+#endif
+            this.sprite = sprite;
+            this.sprite.AddRef();
+        }
+
         public Color color;
 
         public override float getHeight()
@@ -29,5 +43,14 @@ namespace WXB
         {
 
         }
-    };
+
+        protected override void ReleaseSelf()
+        {
+            if (sprite != null)
+            {
+                sprite.SubRef();
+                sprite = null;
+            }
+        }
+    }
 }

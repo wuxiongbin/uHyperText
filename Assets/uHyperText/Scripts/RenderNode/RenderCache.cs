@@ -140,6 +140,10 @@ namespace WXB
                 {
                     PoolData<SpriteData>.Free((SpriteData)bd);
                 }
+                else if (bd is ISpriteData)
+                {
+                    PoolData<ISpriteData>.Free((ISpriteData)bd);
+                }
             }
 
             DataList.Clear();
@@ -159,19 +163,33 @@ namespace WXB
             }
         }
 
-        public void cacheSprite(Line l, NodeBase n, Sprite sprite, Rect rect)
+        public void cacheISprite(Line l, NodeBase n, ISprite sprite, Rect rect)
+        {
+            var s = sprite.Get();
+            if (s != null)
+                cacheSprite(l, n, sprite, rect);
+            else
+            {
+                ISpriteData cd = PoolData<ISpriteData>.Get();
+                cd.Reset(n, sprite, rect, l);
+                DataList.Add(cd);
+            }
+        }
+
+        public void cacheSprite(Line l, NodeBase n, ISprite sprite, Rect rect)
         {
             if (sprite != null)
             {
+                var s = sprite.Get();
                 SpriteData sd = PoolData<SpriteData>.Get();
                 sd.Reset(n, sprite, rect, l);
                 DataList.Add(sd);
 
-                sd.subMaterial = materials.IndexOf(sprite.texture);
+                sd.subMaterial = materials.IndexOf(s.texture);
                 if (sd.subMaterial == -1)
                 {
                     sd.subMaterial = materials.Count;
-                    materials.Add(sprite.texture);
+                    materials.Add(s.texture);
                 }
             }
         }

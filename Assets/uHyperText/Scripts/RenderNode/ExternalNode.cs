@@ -35,7 +35,7 @@ namespace WXB
             if (root != null)
             {
                 UnityEngine.Object.Destroy(root.gameObject);
-                //root.gameObject.SetActive(false);
+                root = null;
             }
         }
 
@@ -71,9 +71,9 @@ namespace WXB
             return node.width;
         }
 
-        public override void Release()
+        protected override void ReleaseSelf()
         {
-            base.Release();
+            base.ReleaseSelf();
             if (node != null)
                 node.OnDestroy();
             node = null;

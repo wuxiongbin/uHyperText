@@ -4,6 +4,19 @@ using System.Collections.Generic;
 
 namespace WXB
 {
+    public interface ISprite
+    {
+        int width { get; }
+        int height { get; }
+        
+        void AddRef();
+ 
+        void SubRef();
+
+        // 请求资源
+        Sprite Get();
+    }
+
     static public partial class Tools
     {
         public const int s_dyn_default_speed = 320;
@@ -50,16 +63,15 @@ namespace WXB
         }
 
         // 得到精灵的接口
-        public static System.Func<string, Sprite> s_get_sprite = null;
+        public static System.Func<string, ISprite> s_get_sprite { set; private get;  }
 
         // 得到字体的接口
         public static System.Func<string, Font> s_get_font = null;
 
-        static public Sprite GetSprite(string name)
+        static public ISprite GetSprite(string name)
         {
             if (s_get_sprite == null)
                 return SymbolTextInit.GetSprite(name);
-
             return s_get_sprite(name);
         }
 
@@ -182,17 +194,25 @@ namespace WXB
 
         static public bool ParseColor(string text, int offset, out Color color)
         {
-            color = Color.white;
-            int l = text.Length - offset;
-            if (l >= 8)
+            try
             {
-                color = ParseColor32(text, offset);
-                return true;
+                color = Color.white;
+                int l = text.Length - offset;
+                if (l >= 8)
+                {
+                    color = ParseColor32(text, offset);
+                    return true;
+                }
+                else if (l >= 6)
+                {
+                    color = ParseColor24(text, offset);
+                    return true;
+                }
             }
-            else if (l >= 6)
+            catch (System.Exception ex)
             {
-                color = ParseColor24(text, offset);
-                return true;
+                color = Color.white;
+                Debug.LogException(ex);
             }
 
             return false;

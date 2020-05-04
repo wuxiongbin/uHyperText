@@ -26,7 +26,7 @@ namespace WXB
             SetMaterialDirty();
             SetRenderDirty();
             m_layoutDirty = true;
-            m_textDirty = false;
+            m_textDirty = true;
         }
 
         public override string text
@@ -62,7 +62,7 @@ namespace WXB
                     if (endl - ((int)itor.Value.userdata) >= MaxElement)
                     {
                         // 要移除掉
-                        itor.Value.Release();
+                        FreeNode(itor.Value);
                         mNodeList.RemoveFirst();
                         itor = mNodeList.First;
                     }
