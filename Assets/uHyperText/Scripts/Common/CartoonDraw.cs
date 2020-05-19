@@ -35,21 +35,19 @@ namespace WXB
 
         void UpdateAnim(float deltaTime)
         {
+            if (frameIndex < 0)
+                frameIndex = 0;
+
             mDelta += Mathf.Min(1f, deltaTime);
-            float rate = 1f / cartoon.fps;
-
-            while (rate < mDelta)
+            var frame = cartoon.frames[frameIndex];
+            if (mDelta >= frame.delay)
             {
-                mDelta = (rate > 0f) ? mDelta - rate : 0f;
-
-                if (++frameIndex >= cartoon.sprites.Length)
+                mDelta -= frame.delay;
+                if (++frameIndex >= cartoon.frames.Length)
                 {
                     frameIndex = 0;
                 }
             }
-
-            if (frameIndex < 0)
-                frameIndex = 0;
         }
 
         List<SpriteData> mData = new List<SpriteData>();
@@ -83,7 +81,7 @@ namespace WXB
             int f = frameIndex;
             UpdateAnim(deltaTime);
 
-            if (f != frameIndex || (currentIsEmpty && cartoon.sprites[f].Get() != null))
+            if (f != frameIndex || (currentIsEmpty && cartoon.frames[f].sprite.Get() != null))
             {
                 CanvasUpdateRegistry.RegisterCanvasElementForGraphicRebuild(this);
             }
@@ -107,7 +105,7 @@ namespace WXB
             if (mData == null)
                 return;
 
-            ISprite si = cartoon.sprites[frameIndex];
+            ISprite si = cartoon.frames[frameIndex].sprite;
             Sprite s = si.Get();
             if (s == null)
             {

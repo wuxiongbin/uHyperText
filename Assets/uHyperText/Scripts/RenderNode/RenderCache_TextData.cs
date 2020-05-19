@@ -116,6 +116,11 @@ namespace WXB
             }
 
             static CharacterInfo s_Info;
+            static float s_xMin;
+            static float s_yMin;
+            static float s_xMax;
+            static float s_yMax;
+            static Vector3 s_point;
 
             public override Vector2 GetStartLeftBottom(float unitsPerPixel)
             {
@@ -159,6 +164,8 @@ namespace WXB
                 // 渲染文本
                 float minY = float.MaxValue;
                 float maxY = float.MinValue;
+
+                int wordspace = node.owner.wordSpacing;
                 {
                     //leftPos = Vector2.zero;
                     Font font = node.d_font;
@@ -172,24 +179,34 @@ namespace WXB
                         {
                             int startVertCount = vh.currentVertCount;
 
-                            Rect cr = Rect.MinMaxRect(
-                                leftBottomPos.x + ((startPos.x + s_Info.minX) * unitsPerPixel),
-                                leftBottomPos.y + ((startPos.y + s_Info.minY) * unitsPerPixel),
-                                leftBottomPos.x + ((startPos.x + s_Info.maxX) * unitsPerPixel),
-                                leftBottomPos.y + ((startPos.y + s_Info.maxY) * unitsPerPixel));
+                            s_xMin = leftBottomPos.x + ((startPos.x + s_Info.minX) * unitsPerPixel);
+                            s_yMin = leftBottomPos.y + ((startPos.y + s_Info.minY) * unitsPerPixel);
+                            s_xMax = leftBottomPos.x + ((startPos.x + s_Info.maxX) * unitsPerPixel);
+                            s_yMax = leftBottomPos.y + ((startPos.y + s_Info.maxY) * unitsPerPixel);
 
-                            vh.AddVert(new Vector3(cr.xMin, cr.yMax), currentColor, s_Info.uvTopLeft);
-                            vh.AddVert(new Vector3(cr.xMax, cr.yMax), currentColor, s_Info.uvTopRight);
-                            vh.AddVert(new Vector3(cr.xMax, cr.yMin), currentColor, s_Info.uvBottomRight);
-                            vh.AddVert(new Vector3(cr.xMin, cr.yMin), currentColor, s_Info.uvBottomLeft);
+                            s_point.x = s_xMin;
+                            s_point.y = s_yMax;
+                            vh.AddVert(s_point, currentColor, s_Info.uvTopLeft);
+
+                            s_point.x = s_xMax;
+                            s_point.y = s_yMax;
+                            vh.AddVert(s_point, currentColor, s_Info.uvTopRight);
+
+                            s_point.x = s_xMax;
+                            s_point.y = s_yMin;
+                            vh.AddVert(s_point, currentColor, s_Info.uvBottomRight);
+
+                            s_point.x = s_xMin;
+                            s_point.y = s_yMin;
+                            vh.AddVert(s_point, currentColor, s_Info.uvBottomLeft);
 
                             vh.AddTriangle(startVertCount + 0, startVertCount + 1, startVertCount + 2);
                             vh.AddTriangle(startVertCount + 2, startVertCount + 3, startVertCount + 0);
 
-                            startPos.x += (s_Info.advance);
+                            startPos.x += s_Info.advance + wordspace;
 
-                            minY = Mathf.Min(cr.yMin, minY);
-                            maxY = Mathf.Max(cr.yMax, maxY);
+                            minY = Mathf.Min(s_yMin, minY);
+                            maxY = Mathf.Max(s_yMax, maxY);
                         }
                     }
                 }

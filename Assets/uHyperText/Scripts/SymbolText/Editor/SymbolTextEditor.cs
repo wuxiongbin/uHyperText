@@ -16,6 +16,7 @@ namespace WXB
         protected SerializedProperty m_MinLineHeight;
         protected SerializedProperty m_isCheckFontY;
         protected SerializedProperty m_LineAlignment;
+        protected SerializedProperty wordSpacing;
 
         protected override void OnEnable()
         {
@@ -26,6 +27,7 @@ namespace WXB
             m_MinLineHeight = serializedObject.FindProperty("m_MinLineHeight");
             m_isCheckFontY = serializedObject.FindProperty("m_isCheckFontY");
             m_LineAlignment = serializedObject.FindProperty("m_LineAlignment");
+            wordSpacing = serializedObject.FindProperty("wordSpacing");
         }
 
         protected virtual void OnGUIFontData()
@@ -68,6 +70,11 @@ namespace WXB
                 else
                     m_ElementSegment.stringValue = alles[current];
             }
+
+            // 字间距+
+            EditorGUILayout.PropertyField(wordSpacing);
+            if (wordSpacing.intValue < 0)
+                wordSpacing.intValue = 0;
 
             // 最小行高
             EditorGUILayout.PropertyField(m_MinLineHeight);

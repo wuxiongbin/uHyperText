@@ -6,7 +6,7 @@ namespace WXB
     public class SymbolTextInit : MonoBehaviour
     {
         static Dictionary<string, Font> Fonts; // 当前所有的字库
-        static Dictionary<string, DSprite> Sprites; // 当前所有的精灵
+        static Dictionary<string, ISprite> Sprites; // 当前所有的精灵
         static Dictionary<string, Cartoon> Cartoons; // 当前所有的动画
 
         [SerializeField]
@@ -32,7 +32,7 @@ namespace WXB
             }
 
             if (Sprites == null)
-                Sprites = new Dictionary<string, DSprite>();
+                Sprites = new Dictionary<string, ISprite>();
             else
                 Sprites.Clear();
 
@@ -76,7 +76,7 @@ namespace WXB
             if (Sprites == null)
                 Init();
 
-            DSprite sprite;
+            ISprite sprite;
             if (Sprites.TryGetValue(name, out sprite))
                 return sprite;
 

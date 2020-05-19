@@ -39,6 +39,11 @@ namespace WXB
         protected LinkedList<NodeBase> mNodeList = new LinkedList<NodeBase>();
 
         [SerializeField]
+        int wordSpacing = 0;
+
+        int Owner.wordSpacing { get { return wordSpacing; } }
+
+        [SerializeField]
         string m_ElementSegment = "Default"; // 分割类型
 
         protected bool m_textDirty = false; // 文字内容变化了，需要重新解析下结点

@@ -60,7 +60,7 @@ namespace WXB
             size.x = 0;
             size.y = FontCache.GetLineHeight(d_font, fontsize, d_fontStyle) * unitsPerPixel;
 
-            Func<char, float> fontwidth = (char code) => { return FontCache.GetAdvance(d_font, fontsize, d_fontStyle, code) * unitsPerPixel; };
+            Func<char, float> fontwidth = (char code) => { return (FontCache.GetAdvance(d_font, fontsize, d_fontStyle, code) + owner.wordSpacing) * unitsPerPixel; };
             ElementSegment es = owner.elementSegment;
             if (es == null)
             {

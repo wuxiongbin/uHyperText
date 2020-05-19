@@ -52,18 +52,6 @@ namespace WXB
 
             OnFuns['a'] = ParserLineAlignment; // 行对齐
 
-            // #后面接数字，最多三位数字，为动画的名称
-            OnFuns['0'] = ParserCartoon;
-            OnFuns['1'] = ParserCartoon;
-            OnFuns['2'] = ParserCartoon;
-            OnFuns['3'] = ParserCartoon;
-            OnFuns['4'] = ParserCartoon;
-            OnFuns['5'] = ParserCartoon;
-            OnFuns['6'] = ParserCartoon;
-            OnFuns['7'] = ParserCartoon;
-            OnFuns['8'] = ParserCartoon;
-            OnFuns['9'] = ParserCartoon;
-
             OnFuns['&'] = ParserNextLineX;
         }
 
@@ -80,37 +68,43 @@ namespace WXB
             currentConfig.nextLineX = linex;
         }
 
-        void ParserCartoon(string text)
-        {
-            Cartoon cartoon = null;
-            int currentPos = d_curPos - 1;
-            for (int i = 3; i >= 1; --i)
-            {
-                int size = -1;
-                if (ParserInt(ref currentPos, text, ref size, i))
-                {
-                    cartoon = Tools.GetCartoon(size.ToString());
-                    if (cartoon != null)
-                        break;
-                }
+        public static int max_cartoon_length = 5;
 
-                currentPos = d_curPos - 1;
+        // #后面接5个字符，为动画的名称
+        bool ParserCartoon(string text)
+        {
+            Cartoon cartoon = null; 
+            int currentPos = d_curPos;
+            for (int i = max_cartoon_length; i >= 1; --i)
+            {
+                if (currentPos + i > text.Length)
+                    continue;
+
+                string name = text.Substring(currentPos, i);
+                cartoon = Tools.GetCartoon(name);
+                if (cartoon != null)
+                {
+                    currentPos += i;
+                    break;
+                }
             }
 
             if (cartoon == null)
-                return;
+                return false;
 
             d_curPos = currentPos;
             save(false);
 
             CartoonNode cn = CreateNode<CartoonNode>();
             cn.cartoon = cartoon;
-            cn.width = cartoon.width * 0.5f;
-            cn.height = cartoon.height * 0.5f;
+            cn.width = cartoon.width;
+            cn.height = cartoon.height;
             cn.SetConfig(currentConfig);
             // 表情不变色
             cn.d_color = Color.white;
             d_nodeList.Add(cn);
+
+            return true;
         }
 
         void ParserDynSpeed(string text)

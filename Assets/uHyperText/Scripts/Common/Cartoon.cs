@@ -28,14 +28,15 @@ namespace WXB
     [System.Serializable]
     public class Cartoon
     {
-        public Cartoon()
+        [System.Serializable]
+        public class Frame
         {
-
+            public DSprite sprite;
+            public float delay;
         }
 
         public string name; // 动画名
-        public float fps; // 播放速度
-        public DSprite[] sprites; // 精灵序列桢
+        public Frame[] frames; // 精灵序列桢
         public float space = 2f; // 与其他元素之间的间隔
 
         public int width;

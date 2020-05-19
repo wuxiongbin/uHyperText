@@ -11,7 +11,7 @@ namespace WXB
         Around around { get; }
 
         RenderCache renderCache { get; }
-
+        int wordSpacing { get; }
         Anchor anchor { get; }
 
         void SetRenderDirty();

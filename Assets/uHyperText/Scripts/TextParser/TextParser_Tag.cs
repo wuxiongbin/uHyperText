@@ -294,17 +294,12 @@ namespace WXB
             config.effectDistance.y = att.getValueAsFloat("y", 1f);
         }
 
-        void TagParam(string tag, string param)
+        System.Action<string, string> GetTagAction(string tag)
         {
-            System.Action<string, string>  fun;
-            if (TagFuns.TryGetValue(tag, out fun))
-            {
-                fun(tag, param);
-            }
-            else
-            {
-                Debug.LogErrorFormat("tag:{0} param:{1} not find!", tag, param);
-            }
+            if (TagFuns.TryGetValue(tag, out var fun))
+                return fun;
+
+            return null;
         }
     }
 }

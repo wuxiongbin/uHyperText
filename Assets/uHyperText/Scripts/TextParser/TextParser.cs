@@ -227,6 +227,8 @@ namespace WXB
 
         System.Func<TagAttributes, IExternalNode> getExternalNode = null;
 
+        static char[] s_tag_key = new char[] { ' ', '=' };
+
         public void parser(Owner owner, string text, Config config, List<NodeBase> vList, System.Func<TagAttributes, IExternalNode> getExternalNode)
         {
             if (string.IsNullOrEmpty(text))
@@ -270,7 +272,7 @@ namespace WXB
                                 string tag = null;
                                 string param = null;
 
-                                int tagend = text.IndexOfAny(new char[] { ' ', '=' }, d_curPos);
+                                int tagend = text.IndexOfAny(s_tag_key, d_curPos);
                                 if (tagend != -1 && tagend < endpos)
                                 {
                                     tag = text.Substring(d_curPos + 1, tagend - d_curPos);
@@ -281,19 +283,18 @@ namespace WXB
                                     tag = text.Substring(d_curPos + 1, endpos - d_curPos - 1);
                                 }
 
-                                if (d_text.Length != 0)
-                                    save(false);
-
-                                TagParam(tag, param);
-
-                                d_curPos = endpos + 1;
-                                break;
-                            }
-                            else
-                            {
-                                d_text.Append(text[d_curPos]);
+                                var func = GetTagAction(tag);
+                                if (func != null)
+                                {
+                                    if (d_text.Length != 0)
+                                        save(false);
+                                    func(tag, param);
+                                    d_curPos = endpos + 1;
+                                    break;
+                                }
                             }
 
+                            d_text.Append(text[d_curPos]);
                             ++d_curPos;
                         }
                         break;
@@ -320,7 +321,7 @@ namespace WXB
                     {
                         fun(text);
                     }
-                    else
+                    else if (!ParserCartoon(text))
                     {
                         d_text.Append(text[d_curPos]);
                         ++d_curPos;
