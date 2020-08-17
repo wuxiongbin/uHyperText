@@ -39,14 +39,17 @@ namespace WXB
                 frameIndex = 0;
 
             mDelta += Mathf.Min(1f, deltaTime);
-            var frame = cartoon.frames[frameIndex];
-            if (mDelta >= frame.delay)
+            var frames = cartoon.frames;
+            var frame = frames[frameIndex];
+            while (mDelta >= frame.delay)
             {
                 mDelta -= frame.delay;
                 if (++frameIndex >= cartoon.frames.Length)
                 {
                     frameIndex = 0;
                 }
+
+                frame = frames[frameIndex];
             }
         }
 
@@ -104,6 +107,9 @@ namespace WXB
 
             if (mData == null)
                 return;
+
+            if (frameIndex < 0)
+                frameIndex = 0;
 
             ISprite si = cartoon.frames[frameIndex].sprite;
             Sprite s = si.Get();

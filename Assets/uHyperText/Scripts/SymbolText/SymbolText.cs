@@ -16,19 +16,41 @@ namespace WXB
 
         public static Mesh WorkerMesh { get { return workerMesh; } }
 
+        static List<SymbolText> Temps = new List<SymbolText>();
         static void RebuildForFont(Font f)
         {
-            for (int i = 0; i < ActiveList.Count; ++i)
+            if (Temps.Count != 0)
+                return; // 说明在递归调用了
+
+            foreach (var self in ActiveList)
             {
-                if (ActiveList[i].font == f)
+                if (self.font == f)
                     continue;
 
-                if (ActiveList[i].isUsedFont(f))
-                    ActiveList[i].FontTextureChangedOther();
+                if (self.isUsedFont(f))
+                {
+                    Temps.Add(self);
+                }
+            }
+
+            int count = Temps.Count;
+            for (int i = 0; i < count; ++i)
+            {
+                Temps[i].FontTextureChangedOther();
+            }
+            Temps.Clear();
+        }
+
+        public static void OnFontWordSpaceing(Font f)
+        {
+            foreach (var self in ActiveList)
+            {
+                if (self.wordSpacing == -1f && self.isUsedFont(f))
+                    self.SetAllDirty();
             }
         }
 
-        static public List<SymbolText> ActiveList = new List<SymbolText>();
+        static public HashSet<SymbolText> ActiveList = new HashSet<SymbolText>();
 
         static TextParser sTextParser = new TextParser();
 
@@ -39,12 +61,22 @@ namespace WXB
         protected LinkedList<NodeBase> mNodeList = new LinkedList<NodeBase>();
 
         [SerializeField]
-        int wordSpacing = 0;
+        float wordSpacing = -1;
 
-        int Owner.wordSpacing { get { return wordSpacing; } }
+        public static System.Func<Font, float> WorldSpacingByFont = null;
+        float Owner.GetWordSpacing(Font font)
+        {
+            if (wordSpacing == -1)
+            {
+                if (WorldSpacingByFont != null)
+                    return WorldSpacingByFont(font);
+            }
+
+            return wordSpacing;
+        }
 
         [SerializeField]
-        string m_ElementSegment = "Default"; // 分割类型
+        string m_SegmentElement = "Empty"; // 分割类型
 
         protected bool m_textDirty = false; // 文字内容变化了，需要重新解析下结点
         protected bool m_renderNodeDirty = false; // 渲染结点的内容变化了，需要重新计算下

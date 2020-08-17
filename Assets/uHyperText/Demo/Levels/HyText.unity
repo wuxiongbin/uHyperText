@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -96,6 +96,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 0
 --- !u!196 &4
@@ -174,11 +175,10 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, Unity.ugui,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -188,6 +188,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &103687226
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -263,11 +264,10 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, Unity.ugui,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 24
@@ -283,11 +283,11 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "#K<b>\u5FAE\u8F6F\u96C5\u9ED1\u4F53</b>#r       \u5FAE\u8F6F\u96C5\u9ED1\u662F\u7F8E\u56FD#h#c[B]\u5FAE\u8F6F#h\u516C\u53F8\u59D4\u6258\u4E2D\u56FD\u5317\u5927\u65B9\u6B63\u7535\u5B50\u6709\u9650\u516C\u53F8\u8BBE\u8BA1\u7684\u4E00\u6B3E\u5168\u9762\u652F\u6301#h#c[B]ClearType#h\u6280\u672F\u7684\u5B57\u4F53\u3002#h#c[B]Monotype#h\u516C\u53F8\u8D1F\u8D23\u5B57\u4F53Hinting\u5DE5\u4F5C\u3002\u5B83\u5C5E\u4E8E#h#c[B]OpenType#h\u7C7B\u578B\uFF0C\u6587\u4EF6\u540D\u662FMSYH.TTF\uFF0C\u5B57\u4F53\u8BBE\u8BA1\u4E0A\u5C5E\u4E8E\u65E0\u886C\u7EBF\u5B57\u4F53\u548C\u9ED1\u4F53\u3002\u8FD9\u79CD\u5B57\u4F53\u6BCF\u4E2A\u5B57\u7684\u9020\u4EF7\u6210\u672C\u5728100\u7F8E\u5143\u5DE6\u53F3\u3002\u8BE5\u5B57\u4F53\u5BB6\u65CF\u8FD8\u5305\u62EC\u201C\u5FAE\u8F6F\u96C5\u9ED1Bold\u201D\uFF08\u7C97\u4F53\uFF09\uFF0C\u6587\u4EF6\u540D\u4E3AMSYHBD.TTF\u3002\u8FD9\u4E2A\u7C97\u4F53\u4E0D\u662F\u5355\u7EAF\u7684\u5C06\u666E\u901A\u5B57\u7B26\u52A0\u7C97\uFF0C\u800C\u662F\u5728\u5177\u4F53\u7B14\u753B\u4E0A\u5206\u522B\u8FDB\u884C\u5904\u7406\uFF0C\u56E0\u6B64\u662F\u72EC\u7ACB\u7684\u4E00\u4E2A\u5B57\u4F53\u3002\u5FAE\u8F6F\u96C5\u9ED1\u968F\u7B80\u4F53\u4E2D\u6587\u7248#h#c[B]Windows
     Vista#h\u4E00\u8D77\u53D1\u5E03\uFF0C\u662FWindows Vista\u9ED8\u8BA4\u5B57\u4F53\u3002\u53E6\u5916\uFF0C#h#c[B]Microsoft
-    Office 2007#h\u7B80\u4F53\u4E2D\u6587\u7248\u4E5F\u9644\u5E26\u8FD9\u4E2A\u5B57\u4F53\u3002\n\n\u4E2D\u6587\u540D
-    \  \u5FAE\u8F6F\u96C5\u9ED1<pos v=0.5 t=1>\u6587\u4EF6\u7248\u672C      6.02\n\u5916\u6587\u540D
-    \  Msyh\uFF08microsoft yahei\uFF09<pos v=0.5 t=1>\u5B57\u4F53\u5D4C\u5165\u6027
-    \  \u53EF\u7F16\u8F91\n\u516C    \u53F8  Microsoft Corporation<pos v=0.5 t=1>\u683C
-    \   \u5F0F         TTF\n\n\u7F16\u7801\n<RectSprite n=mysh c=white py=355>\n\n\u5728\u6DB5\u76D6\u7684\u5B57\u5E93\u4E0A\uFF0C\u5FAE\u8F6F\u96C5\u9ED1\u652F\u6301GBK\u5B57\u7B26\u96C6\uFF0C\u5305\u542B\u4E86Unicode\u7684\u6240\u6709
+    Office 2007#h\u7B80\u4F53\u4E2D\u6587\u7248\u4E5F\u9644\u5E26\u8FD9\u4E2A\u5B57\u4F53\u3002\n\n\u4E2D\u6587\u540D  
+    \u5FAE\u8F6F\u96C5\u9ED1<pos v=0.5 t=1>\u6587\u4EF6\u7248\u672C      6.02\n\u5916\u6587\u540D  
+    Msyh\uFF08microsoft yahei\uFF09<pos v=0.5 t=1>\u5B57\u4F53\u5D4C\u5165\u6027  
+    \u53EF\u7F16\u8F91\n\u516C    \u53F8  Microsoft Corporation<pos v=0.5 t=1>\u683C   
+    \u5F0F         TTF\n\n\u7F16\u7801\n<RectSprite n=mysh c=white py=355>\n\n\u5728\u6DB5\u76D6\u7684\u5B57\u5E93\u4E0A\uFF0C\u5FAE\u8F6F\u96C5\u9ED1\u652F\u6301GBK\u5B57\u7B26\u96C6\uFF0C\u5305\u542B\u4E86Unicode\u7684\u6240\u6709
     20902\u4E2A\u4E2D\u6587\u5B57\u7B26\u4EE5\u53CA\u4E2D\u56FD\u56FD\u5BB6\u6807\u51C6\u5316\u7EC4\u7EC7\u6DFB\u52A0\u7684\u5927\u7EA6
     80\u4E2A\u4E2D\u6587\u5B57\u7B26\uFF0C\u8FD8\u5305\u542B\u4E86Big5\u7684\u7E41\u4F53\u4E2D\u6587\u5B57\u7B26\u548CGB2312\u4E2D\u7684\u7B80\u4F53\u4E2D\u6587\u5B57\u7B26\u3002\n\n\n\n\n\n\u8BE6\u89E3\u7F16\u8F91\r\nMicrosoft
     Windows Vista\u5DF2\u4E8E2006\u5E7412\u6708\u53D1\u5E03\u3002\u968F\u7740\u8FD9\u5957\u65B0\u7684\u4E2D\u6587\u64CD\u4F5C\u7CFB\u7EDF\u7684\u516C\u6D4B\uFF0C\u4E00\u6B3E\u5168\u65B0\u7684\u652F\u6301
@@ -302,7 +302,8 @@ MonoBehaviour:
     11px \u4E0B\u7684\u663E\u793A\u975E\u5E38\u4F18\u79C0\uFF0C 10px \u7684\u5B57\u57FA\u672C\u53EF\u4EE5\u8FA8\u8BA4\uFF0C
     9px \u4EE5\u4E0B\uFF0C\u5BF9\u4E8E\u6C49\u5B57\u7684\u6B63\u5E38\u663E\u793A\uFF0C\u5DF2\u7ECF\u662F\u4E0D\u53EF\u80FD\u7684\u4EFB\u52A1\u4E86\uFF0C\u5E73\u5E38\u4E5F\u4E0D\u4F1A\u4F5C\u4E3A\u6B63\u5E38\u7684\u5C4F\u5E55\u4F7F\u7528\u5B57\u53F7\uFF0C\u4F46\u8FD9\u4E2A\u6781\u9650\u5B57\u53F7\u7684\u6D4B\u8BD5\u662F\u4E00\u4E2A\u6709\u53C2\u8003\u4EF7\u503C\u7684\u9879\u76EE\u3002\u6211\u4EEC\u53EF\u4EE5\u770B\u5230\uFF0C\u7531\u4E8E\u5B57\u4F53\u8BBE\u8BA1\u5E08\u51FA\u8272\u7684Hinting\u5DE5\u4F5C\uFF0C\u96C5\u9ED1\u5728\u8FD9\u79CD\u60C5\u51B5\u4E0B\u4ECD\u7136\u8FD8\u6709\u5927\u7EA6\u4E00\u534A\u5DE6\u53F3\u7684\u5B57\u7B26\u53EF\u4EE5\u8BC6\u522B\u51FA\u6765\u3002\r\n4.
     \u5BF9\u4E8E\u6700\u5E38\u7528\u7684\u5B57\u53F7\u3002\r\n12 \u3001 14px \uFF0C\u5FAE\u8F6F\u96C5\u9ED1\u7684\u663E\u793A\u975E\u5E38\u7684\u6E05\u6670\u548C\u4F18\u7F8E\uFF0C\u4E2D\u82F1\u6587\u7684\u642D\u914D\u975E\u5E38\u7684\u548C\u8C10\u3002\u548C\u5B8B\u4F53\u76F8\u6BD4\uFF0C\u96C5\u9ED1\u7684\u5B57\u5F62\u4E0D\u662F\u6B63\u65B9\u5F62\u7684\uFF0C\u800C\u662F\u7A0D\u5FAE\u7684\u6241\u5BBD\uFF0C\u5B57\u95F4\u8DDD\u5F88\u5C0F\uFF0C\u8FD9\u6837\u7684\u5904\u7406\u4F7F\u5F97\u9ED8\u8BA4\u7684\u884C\u95F4\u8DDD\u66F4\u4E3A\u660E\u6670\uFF1B\u540C\u65F6\u96C5\u9ED1\u7684\u5B57\u5FC3\u663E\u5F97\u66F4\u4E3A\u9971\u6EE1\uFF0C\u5728\u540C\u6837\u7684\u5B57\u53F7\u4E0B\uFF0C\u96C5\u9ED1\u7684\u5355\u5B57\u9762\u79EF\u5C31\u663E\u5F97\u66F4\u5927\uFF0C\u66F4\u5BB9\u6613\u8BC6\u522B\uFF0C\u9605\u8BFB\u8D77\u6765\u4E5F\u66F4\u8212\u670D\u3002"
-  m_ElementSegment: Default
+  wordSpacing: -1
+  m_SegmentElement: Empty
   m_MinLineHeight: 10
   m_LineAlignment: 2
   m_isCheckFontY: 0
@@ -340,8 +341,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: WXB.SymbolTextEvent+OnClickEvent, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &328391856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,11 +542,10 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, Unity.ugui,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
@@ -622,11 +620,10 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, Unity.ugui,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 24
@@ -642,18 +639,19 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "#K<b>\u5FAE\u8F6F\u96C5\u9ED1\u4F53</b>\n       \u5FAE\u8F6F\u96C5\u9ED1\u662F\u7F8E\u56FD#h#c[B]\u5FAE\u8F6F#h\u516C\u53F8\u59D4\u6258\u4E2D\u56FD\u5317\u5927\u65B9\u6B63\u7535\u5B50\u6709\u9650\u516C\u53F8\u8BBE\u8BA1\u7684\u4E00\u6B3E\u5168\u9762\u652F\u6301#h#c[B]ClearType#h\u6280\u672F\u7684\u5B57\u4F53\u3002#h#c[B]Monotype#h\u516C\u53F8\u8D1F\u8D23\u5B57\u4F53Hinting\u5DE5\u4F5C\u3002\u5B83\u5C5E\u4E8E#h#c[B]OpenType#h\u7C7B\u578B\uFF0C\u6587\u4EF6\u540D\u662FMSYH.TTF\uFF0C\u5B57\u4F53\u8BBE\u8BA1\u4E0A\u5C5E\u4E8E\u65E0\u886C\u7EBF\u5B57\u4F53\u548C\u9ED1\u4F53\u3002\u8FD9\u79CD\u5B57\u4F53\u6BCF\u4E2A\u5B57\u7684\u9020\u4EF7\u6210\u672C\u5728100\u7F8E\u5143\u5DE6\u53F3\u3002\u8BE5\u5B57\u4F53\u5BB6\u65CF\u8FD8\u5305\u62EC\u201C\u5FAE\u8F6F\u96C5\u9ED1Bold\u201D\uFF08\u7C97\u4F53\uFF09\uFF0C\u6587\u4EF6\u540D\u4E3AMSYHBD.TTF\u3002\u8FD9\u4E2A\u7C97\u4F53\u4E0D\u662F\u5355\u7EAF\u7684\u5C06\u666E\u901A\u5B57\u7B26\u52A0\u7C97\uFF0C\u800C\u662F\u5728\u5177\u4F53\u7B14\u753B\u4E0A\u5206\u522B\u8FDB\u884C\u5904\u7406\uFF0C\u56E0\u6B64\u662F\u72EC\u7ACB\u7684\u4E00\u4E2A\u5B57\u4F53\u3002\u5FAE\u8F6F\u96C5\u9ED1\u968F\u7B80\u4F53\u4E2D\u6587\u7248#h#c[B]Windows
     Vista#h\u4E00\u8D77\u53D1\u5E03\uFF0C\u662FWindows Vista\u9ED8\u8BA4\u5B57\u4F53\u3002\u53E6\u5916\uFF0C#h#c[B]Microsoft
-    Office 2007#h\u7B80\u4F53\u4E2D\u6587\u7248\u4E5F\u9644\u5E26\u8FD9\u4E2A\u5B57\u4F53\u3002\n\n\u4E2D\u6587\u540D
-    \  \u5FAE\u8F6F\u96C5\u9ED1<pos v=0.5 t=1>\u6587\u4EF6\u7248\u672C      6.02\n\u5916\u6587\u540D
-    \  Msyh\uFF08microsoft yahei\uFF09<pos v=0.5 t=1>\u5B57\u4F53\u5D4C\u5165\u6027
-    \  \u53EF\u7F16\u8F91\n\u516C    \u53F8  Microsoft Corporation<pos v=0.5 t=1>\u683C
-    \   \u5F0F         TTF\n\n\u7F16\u7801\n<RectSprite n=mysh c=white y=355>\n\n\u5728\u6DB5\u76D6\u7684\u5B57\u5E93\u4E0A\uFF0C\u5FAE\u8F6F\u96C5\u9ED1\u652F\u6301GBK\u5B57\u7B26\u96C6\uFF0C\u5305\u542B\u4E86Unicode\u7684\u6240\u6709
+    Office 2007#h\u7B80\u4F53\u4E2D\u6587\u7248\u4E5F\u9644\u5E26\u8FD9\u4E2A\u5B57\u4F53\u3002\n\n\u4E2D\u6587\u540D  
+    \u5FAE\u8F6F\u96C5\u9ED1<pos v=0.5 t=1>\u6587\u4EF6\u7248\u672C      6.02\n\u5916\u6587\u540D  
+    Msyh\uFF08microsoft yahei\uFF09<pos v=0.5 t=1>\u5B57\u4F53\u5D4C\u5165\u6027  
+    \u53EF\u7F16\u8F91\n\u516C    \u53F8  Microsoft Corporation<pos v=0.5 t=1>\u683C   
+    \u5F0F         TTF\n\n\u7F16\u7801\n<RectSprite n=mysh c=white y=355>\n\n\u5728\u6DB5\u76D6\u7684\u5B57\u5E93\u4E0A\uFF0C\u5FAE\u8F6F\u96C5\u9ED1\u652F\u6301GBK\u5B57\u7B26\u96C6\uFF0C\u5305\u542B\u4E86Unicode\u7684\u6240\u6709
     20902\u4E2A\u4E2D\u6587\u5B57\u7B26\u4EE5\u53CA\u4E2D\u56FD\u56FD\u5BB6\u6807\u51C6\u5316\u7EC4\u7EC7\u6DFB\u52A0\u7684\u5927\u7EA6
     80\u4E2A\u4E2D\u6587\u5B57\u7B26\uFF0C\u8FD8\u5305\u542B\u4E86Big5\u7684\u7E41\u4F53\u4E2D\u6587\u5B57\u7B26\u548CGB2312\u4E2D\u7684\u7B80\u4F53\u4E2D\u6587\u5B57\u7B26\u3002\n\n\n\n\n\n\u8BE6\u89E3\u7F16\u8F91\r\nMicrosoft
     Windows Vista\u5DF2\u4E8E2006\u5E7412\u6708\u53D1\u5E03\u3002\u968F\u7740\u8FD9\u5957\u65B0\u7684\u4E2D\u6587\u64CD\u4F5C\u7CFB\u7EDF\u7684\u516C\u6D4B\uFF0C\u4E00\u6B3E\u5168\u65B0\u7684\u652F\u6301
     ClearType\u6280\u672F\u7684\u4E2D\u6587\u754C\u9762\u663E\u793A\u5B57\u4F53\u6D6E\u51FA\u6C34\u9762\uFF0C\u8FD9\u5C31\u662F\u5FAE\u8F6F\u96C5\u9ED1\u4F53\u3002\r\n\u8FD9\u6B3E\u5B57\u4F53\u662F\u4E00\u79CD\u5168\u65B0\u7684\u65E0\u886C\u7EBF\u9ED1\u4F53\uFF0C\u5B83\u7684\u5B57\u5F62\u7565\u5448\u6241\u65B9\u800C\u9971\u6EE1\uFF0C\u7B14\u753B\u7B80\u6D01\u800C\u8212\u5C55\uFF0C\u6613\u4E8E\u9605\u8BFB\u3002\u8FD9\u6B3E\u5B57\u4F53\u5728
     ClearType \u6280\u672F\u4E0B\u7684\u6E05\u65B0\u548C\u4F18\u7F8E\u7740\u5B9E\u7ED9\u4EBA\u7559\u4E0B\u4E86\u6DF1\u523B\u7684\u5370\u8C61\u3002\u540C\u65F6\uFF0C\u5FAE\u8F6F\u65B9\u9762\u4E5F\u4E3A\u8FD9\u79CD\u65B0\u578B\u5B57\u4F53\u4ED8\u51FA\u4E86\u6602\u8D35\u7684\u4EE3\u4EF7\u3002\u201C\u8FD9\u79CD\u5B57\u4F53\u6BCF\u4E2A\u5B57\u7684\u9020\u4EF7\u6210\u672C\u5728100\u7F8E\u5143\u5DE6\u53F3\uFF0C\u636E\u4E0D\u5B8C\u5168\u7EDF\u8BA1\uFF0C\u6211\u56FD\u5404\u5B57\u5178\u3001\u8BCD\u6D77\u6536\u5F55\u67092\u4E07\u591A\u4E2A\u6C49\u5B57\u201D\u3002\u4E00\u4F4D\u5FAE\u8F6F\u7684\u5DE5\u4F5C\u4EBA\u5458\u5982\u6B64\u8868\u793A\u3002\u5FAE\u8F6F\u96C5\u9ED1\u6709\u5982\u4E0B\u7279\u70B9\uFF1A\n\n1.
     \u5355\u72EC\u8BBE\u8BA1\u7684\u7C97\u4F53\u3002\r\n\u4EE5\u5F80\u5B8B\u4F53\u7684\u7C97\u4F53\u90FD\u662F\u901A\u8FC7\u5185\u5D4C\u70B9\u9635\u6216\u8005\u5B57\u4F53\u5F15\u64CE\u6E32\u67D3\u7684\uFF0C\u6548\u679C\u4E0D\u662F\u5F88\u597D\u3002\u7C97\u4F53\u7684\u5355\u72EC\u8BBE\u8BA1\u610F\u5473\u7740\u53E6\u5916\u8BBE\u8BA1\u4E00\u5957\u5B57\u4F53\uFF0C\u6240\u6709\u7684\u65F6\u95F4\u6210\u672C\u548C\u4EBA\u529B\u6210\u672C\u7FFB\u500D\uFF0C\u9020\u4EF7\u4E5F\u4F1A\u7FFB\u500D\uFF0C\u4F46\u662F\u663E\u793A\u6548\u679C\u4E5F\u4F1A\u975E\u5E38\u597D\u3002\u518D\u8003\u8651\u5230\u7E41\u4F53\u4E2D\u6587\u548C\u65E5\u6587\u97E9\u6587\u90FD\u662F\u5982\u6B64\u5904\u7406\uFF0C\u5FAE\u8F6F\u8FD9\u6B21\u771F\u7684\u4E0B\u4E86\u8840\u672C\u4E86\u3002"
-  m_ElementSegment: Default
+  wordSpacing: -1
+  m_SegmentElement: Empty
   m_MinLineHeight: 10
   m_LineAlignment: 2
   m_isCheckFontY: 0
@@ -719,11 +717,10 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.392}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, Unity.ugui,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -733,6 +730,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1688818323
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -771,8 +769,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.ScrollRect+ScrollRectEvent, Unity.ugui, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!1 &1920276478
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,8 +779,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1920276483}
   - component: {fileID: 1920276482}
-  - component: {fileID: 1920276481}
-  - component: {fileID: 1920276480}
   - component: {fileID: 1920276479}
   m_Layer: 0
   m_Name: Main Camera
@@ -795,22 +789,6 @@ GameObject:
   m_IsActive: 1
 --- !u!81 &1920276479
 AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1920276478}
-  m_Enabled: 1
---- !u!124 &1920276480
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1920276478}
-  m_Enabled: 1
---- !u!92 &1920276481
-Behaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -965,8 +943,9 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2131741849}
   m_Enabled: 1
-  serializedVersion: 9
+  serializedVersion: 10
   m_Type: 1
+  m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10

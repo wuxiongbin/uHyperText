@@ -96,6 +96,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 0
 --- !u!196 &4
@@ -130,8 +131,6 @@ GameObject:
   m_Component:
   - component: {fileID: 149700829}
   - component: {fileID: 149700828}
-  - component: {fileID: 149700827}
-  - component: {fileID: 149700826}
   - component: {fileID: 149700825}
   m_Layer: 0
   m_Name: Main Camera
@@ -142,22 +141,6 @@ GameObject:
   m_IsActive: 1
 --- !u!81 &149700825
 AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 149700824}
-  m_Enabled: 1
---- !u!124 &149700826
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 149700824}
-  m_Enabled: 1
---- !u!92 &149700827
-Behaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -246,8 +229,9 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1090480826}
   m_Enabled: 1
-  serializedVersion: 9
+  serializedVersion: 10
   m_Type: 1
+  m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10
@@ -364,11 +348,10 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, Unity.ugui,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 25
@@ -386,7 +369,8 @@ MonoBehaviour:
     + \u516D\u4E2A\u6216\u516B\u4E2A\u6570\u5B57\u6216\u8005A-F\u5B57\u6BCD-\u81EA\u5B9A\u4E49\u989C\u8272\u3002\u4F8B\u5982\uFF1A#c008000##c008000=\u6697\u7EFF\u8272\r#n\n#u##u
     + \u6587\u5B57 + ##u-\u6587\u5B57\u6709\u4E0B\u5212\u7EBF\u3002\r#u\n##n-\u6240\u6709\u6587\u5B57\u72B6\u6001\u6062\u590D\u6B63\u5E38\u3002\r\n##r
     -\u6587\u5B57\u6362\u884C\u3002\r\n####-\u7B49\u4E8E\u4E00\u4E2A#\u53F7\u3002\n#h\u8FD9\u662F\u4E00\u4E2A\u8D85\u94FE\u63A5{\u4F60\u4E2B\u7684}#h"
-  m_ElementSegment: Default
+  wordSpacing: -1
+  m_SegmentElement: Empty
   m_MinLineHeight: 10
   m_LineAlignment: 2
   m_isCheckFontY: 0
@@ -616,11 +600,10 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, Unity.ugui,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -630,6 +613,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &2103213322
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace WXB
 {
-    internal static class ListPool<T>
+    public static class ListPool<T>
     {
         // Object pool to avoid allocations.
         private static readonly ObjectPool<List<T>> s_ListPool = new ObjectPool<List<T>>(null, l => l.Clear());

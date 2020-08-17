@@ -28,10 +28,9 @@ namespace WXB
     [System.Serializable]
     public class Cartoon
     {
-        [System.Serializable]
         public class Frame
         {
-            public DSprite sprite;
+            public ISprite sprite;
             public float delay;
         }
 

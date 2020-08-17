@@ -1,6 +1,5 @@
 ﻿using UnityEditor;
 using UnityEditor.UI;
-using UnityEngine.UI;
 using System.Collections.Generic;
 
 namespace WXB
@@ -12,7 +11,7 @@ namespace WXB
     {
         protected SerializedProperty m_Text;
         protected SerializedProperty m_FontData;
-        protected SerializedProperty m_ElementSegment;
+        protected SerializedProperty m_SegmentElement;
         protected SerializedProperty m_MinLineHeight;
         protected SerializedProperty m_isCheckFontY;
         protected SerializedProperty m_LineAlignment;
@@ -23,7 +22,7 @@ namespace WXB
             base.OnEnable();
             m_Text = serializedObject.FindProperty("m_Text");
             m_FontData = serializedObject.FindProperty("m_FontData");
-            m_ElementSegment = serializedObject.FindProperty("m_ElementSegment");
+            m_SegmentElement = serializedObject.FindProperty("m_SegmentElement");
             m_MinLineHeight = serializedObject.FindProperty("m_MinLineHeight");
             m_isCheckFontY = serializedObject.FindProperty("m_isCheckFontY");
             m_LineAlignment = serializedObject.FindProperty("m_LineAlignment");
@@ -56,7 +55,7 @@ namespace WXB
                 List<string> alles = new List<string>();
                 alles.Add("Empty");
                 alles.AddRange(ESFactory.GetAllName());
-                int current = alles.IndexOf(m_ElementSegment.stringValue);
+                int current = alles.IndexOf(m_SegmentElement.stringValue);
                 if (current == -1)
                     current = 0;
 
@@ -66,15 +65,15 @@ namespace WXB
 
                 current = EditorGUILayout.IntPopup("Element Segment", current, alles.ToArray(), optionValues);
                 if (current <= 0)
-                    m_ElementSegment.stringValue = null;
+                    m_SegmentElement.stringValue = null;
                 else
-                    m_ElementSegment.stringValue = alles[current];
+                    m_SegmentElement.stringValue = alles[current];
             }
 
             // 字间距+
             EditorGUILayout.PropertyField(wordSpacing);
-            if (wordSpacing.intValue < 0)
-                wordSpacing.intValue = 0;
+            //if (wordSpacing.floatValue < 0)
+            //    wordSpacing.floatValue = 0;
 
             // 最小行高
             EditorGUILayout.PropertyField(m_MinLineHeight);

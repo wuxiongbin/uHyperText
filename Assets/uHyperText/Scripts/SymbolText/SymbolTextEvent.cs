@@ -60,6 +60,7 @@ namespace WXB
 
         public void OnPointerUp(PointerEventData eventData)
         {
+            if (eventData.dragging) return;
             if (!Tools.ScreenPointToWorldPointInRectangle(d_symbolText.rectTransform, eventData.position, d_symbolText.canvas.worldCamera, out localPosition))
                 return;
 

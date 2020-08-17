@@ -11,7 +11,7 @@ namespace WXB
             get
             {
                 UpdateByDirty();
-                return getNodeWidth();
+                return getNodeWidth() / pixelsPerUnit;
             }
         }
 
@@ -20,7 +20,7 @@ namespace WXB
             get
             {
                 UpdateByDirty();
-                return getNodeHeight();
+                return getNodeHeight() / pixelsPerUnit;
             }
         }
 
@@ -129,10 +129,10 @@ namespace WXB
         {
             get
             {
-                if (string.IsNullOrEmpty(m_ElementSegment))
+                if (string.IsNullOrEmpty(m_SegmentElement))
                     return null;
 
-                return ESFactory.Get(m_ElementSegment);
+                return ESFactory.Get(m_SegmentElement);
             }
         }
 

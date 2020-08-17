@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace WXB
 {
-    internal class PoolData<T> where T : new()
+    public class PoolData<T> where T : new()
     {
         static public List<T> bufs = new List<T>();
         
@@ -32,7 +32,7 @@ namespace WXB
         }
     }
 
-    internal struct PD<T> : System.IDisposable where T : new() 
+    public struct PD<T> : System.IDisposable where T : new() 
     {
         public PD(System.Action<T> free)
         {
@@ -50,12 +50,12 @@ namespace WXB
         }
     }
 
-    interface IFactory
+    public interface IFactory
     {
         object create();
     }
 
-    internal class Factory<T> : IFactory where T : new()
+    public class Factory<T> : IFactory where T : new()
     {
         public Factory(System.Action<T> f)
         {
@@ -70,7 +70,7 @@ namespace WXB
         }
     }
 
-    internal static class Pool
+    public static class Pool
     {
         static Factory<StringBuilder> sb_factory = null;
         public static PD<StringBuilder> GetSB()
